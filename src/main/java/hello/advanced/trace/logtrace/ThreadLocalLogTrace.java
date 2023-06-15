@@ -17,9 +17,7 @@ public class ThreadLocalLogTrace implements LogTrace {
 
     @Override
     public TraceStatus begin(String message) {
-        TraceId clone = traceIdHolder.get();
         syncTraceId();
-//        log.info("같을까요? {}", clone == traceIdHolder); // 새로운 traceId를 만들어 할
         TraceId traceId = traceIdHolder.get();
         long startTimeMs = System.currentTimeMillis();
         log.info("[{}] {}{}", traceId.getId(), addSpace(START_PREFIX, traceId.getLevel()), message);
